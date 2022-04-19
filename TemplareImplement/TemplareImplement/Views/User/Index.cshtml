@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+<link href="~/Scripts/jtable/themes/metro/darkgray/jtable.css" rel="stylesheet" />
+<link href="~/css/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+<link href="~/Scripts/jtable/themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="font-weight-bold mb-0">Manage User</h4>
+            </div>
+            <div>
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Dashboard">Home</a></li>
+                    <li class="breadcrumb-item active">Manage User</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="row">
+                <div id="tblUser"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblUser').jtable({
+            title: 'User Master',
+            paging: true,
+            pageSize: 5,
+            sorting: true,
+            defaultSorting: 'UserID DESC',
+            pageSizes: [5, 10, 25, 50, 100],
+            actions:
+            {
+                listAction: 'User/GetDetails',
+                createAction: 'User/Create',
+                updateAction: 'User/Edit',
+                deleteAction: 'User/Delete',
+            },
+            fields: {
+                UserID: {
+                    key: true,
+                    list: false
+                },
+                Name: {
+                    title: 'Name',
+                    width: '20%'
+                },
+                LoginId: {
+                    title: 'LoginId',
+                    width: '20%'
+                },
+                Pass: {
+                    title: 'Password',
+                    width: '20%',
+                    type: 'password',
+                },
+                //Pass: {
+                //    title: 'Confirm Pass',
+                //    width: '20%'
+                //},
+                IsActive: {
+                    title: 'Active',
+                    create: false,
+                    edit: false,
+                    width: '10%'
+                }
+            }
+        });
+        $('#tblUser').jtable('reload');
+    });
+</script>
+@section scripts{
+    <script src="~/Scripts/bootstrap-select.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js" integrity="sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k=" crossorigin="anonymous"></script>
+    <script src="~/Scripts/jtable/jquery.jtable.js"></script>
+    <script src="~/Scripts/jquery.validationEngine.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validationEngine-en.js"></script>
+}
